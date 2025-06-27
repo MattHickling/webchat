@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Broadcast::routes();
 
 Route::get('/dashboard', function () {
     return view('dashboard');
