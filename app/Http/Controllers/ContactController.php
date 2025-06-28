@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Contact as ContactRequest;
 class ContactController extends Controller
 {
     public function addContact(Request $request)
@@ -13,7 +13,7 @@ class ContactController extends Controller
         return view('contacts.display');
     }
 
-    public function create(Request $request)
+    public function create(ContactRequest $request)
     {
         // dd($request->surname);
 
