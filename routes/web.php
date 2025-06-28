@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/add-contact', [ContactController::class, 'addContact']);
     Route::post('/create-contact', [ContactController::class, 'create'])->name('contact.create');
+
+    Route::get('/new-chat', [MessageController::class, 'newChat']);
+
 });
 
 require __DIR__.'/auth.php';
