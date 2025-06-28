@@ -6,5 +6,10 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    //
+    public function newChat()
+    {
+       
+        return view('messages.display');
+    }
+    
 }
