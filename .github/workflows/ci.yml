@@ -1,6 +1,6 @@
 name: WebChat Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push,commit]
+on: [push]
 jobs:
   WebChat-Actions:
     runs-on: macos-latest
