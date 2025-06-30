@@ -1,8 +1,8 @@
 name: WebChat Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on: [push,commit]
 jobs:
-  Explore-GitHub-Actions:
+  WebChat-Actions:
     runs-on: macos-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
