@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-contact', [ContactController::class, 'addContact']);
     Route::post('/create-contact', [ContactController::class, 'create'])->name('contact.create');
 
-    Route::get('/new-chat', [MessageController::class, 'newChat']);
     Route::get('/messages', [MessageController::class, 'show'])->name('messages.show');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
