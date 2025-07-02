@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function newChat()
-    {
-       
-       $contacts = Contact::all();
-       return view('messages.display', compact('contacts'));
-    }
-
     public function show(Request $request)
     {
         $contacts = Contact::all();
@@ -28,7 +21,7 @@ class MessageController extends Controller
                 ->get();
         }
 
-        return view('messages.show', compact('contacts', 'messages'));
+        return view('messages.display', compact('contacts', 'messages'));
     }
 
     public function store(Request $request)
@@ -48,10 +41,6 @@ class MessageController extends Controller
             ->with('success', 'Message sent!');
     }
 
-
-
-
-    
     public function create(Request $request)
     {
     
