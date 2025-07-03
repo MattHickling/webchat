@@ -33,7 +33,17 @@ class MessageController extends Controller
 
         Message::create([
             'contact_id' => $request->contact_id,
-            'body' => $request->body,
+            'content' => $request->body,
+            'type' => 'text',
+            'status' => 'sent',
+            'sent_at' => now(),
+            'delivered_at' => now(),
+            'read_at' => null,
+            'media_url' => $request->media_url ?? null,
+            'media_type' => $request->media_type ?? null,
+            'reply_to_message_id' => $request->reply_to_message_id ?? null,
+            'is_starred' => $request->is_starred ?? false,
+            'is_read' => false,
             'user_id' => auth()->id(), 
         ]);
 
