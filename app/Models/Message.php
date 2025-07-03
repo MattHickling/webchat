@@ -8,10 +8,12 @@ class Message extends Model
 {
     protected $fillable = [
         'id',
+        'user_id',
         'contact_id',
         'content',
         'content_type',
         'status',
+        'type',
         'sent_at',
         'delivered_at',
         'read_at',
