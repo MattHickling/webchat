@@ -30,9 +30,11 @@
                 @if($messages->count())
                     <div class="space-y-4 max-h-96 overflow-y-auto">
                         @foreach ($messages as $message)
+                        {{-- {{ dd($message) }} --}}
                             <div class="p-3 rounded bg-white shadow">
                                 <p class="text-gray-700">{{ $message->body }}</p>
-                                <p class="text-xs text-gray-500">{{ $message->created_at->format('Y-m-d H:i') }}</p>
+                                <p class="text-xs text-gray-500">{{ $message->created_at->format('d-m-y H:i') }}</p>
+                                <p class="text-xs text-gray-500">{{ $message->content }}</p>
                             </div>
                         @endforeach
                     </div>
