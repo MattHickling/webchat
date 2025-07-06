@@ -23,7 +23,7 @@
 
         <form id="send-message-form" action="{{ route('messages.store') }}" method="POST" class="mt-4">
             @csrf
-            <input type="hidden" name="contact_id" value="{{ $contactId }}">
+            {{-- <input type="hidden" name="contact_id" value="{{ $contactId }}"> --}}
             <textarea name="body" rows="3" class="w-full border rounded p-2" placeholder="Write your message..."></textarea>
             <button type="submit" class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Send</button>
         </form>
