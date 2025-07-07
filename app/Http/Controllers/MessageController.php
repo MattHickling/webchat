@@ -10,18 +10,21 @@ class MessageController extends Controller
 {
     public function show(Request $request)
     {
+
         $contacts = Contact::all();
         $contactId = $request->get('contact_id');
-
-        $messages = collect();
-
+        // dd($contacts);
+        $messages = Message::where('contact_id', $contactId)
+            ->orderBy('created_at')
+            ->get();
+// dd($messages);
         if ($contactId) {
             $messages = Message::where('contact_id', $contactId)
                 ->orderBy('created_at')
                 ->get();
         }
 
-        return view('messages.display', compact('contacts', 'messages'));
+        return view('messages.display', compact('contacts', 'messages', 'contactId'));
     }
 
     public function store(Request $request)
