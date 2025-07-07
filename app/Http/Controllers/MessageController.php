@@ -14,8 +14,10 @@ class MessageController extends Controller
         $contacts = Contact::all();
         $contactId = $request->get('contact_id');
         // dd($contacts);
-        $messages = collect();
-
+        $messages = Message::where('contact_id', $contactId)
+            ->orderBy('created_at')
+            ->get();
+// dd($messages);
         if ($contactId) {
             $messages = Message::where('contact_id', $contactId)
                 ->orderBy('created_at')
