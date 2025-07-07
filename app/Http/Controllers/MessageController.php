@@ -10,9 +10,10 @@ class MessageController extends Controller
 {
     public function show(Request $request)
     {
+
         $contacts = Contact::all();
         $contactId = $request->get('contact_id');
-
+        // dd($contacts);
         $messages = collect();
 
         if ($contactId) {
@@ -21,7 +22,7 @@ class MessageController extends Controller
                 ->get();
         }
 
-        return view('messages.display', compact('contacts', 'messages'));
+        return view('messages.display', compact('contacts', 'messages', 'contactId'));
     }
 
     public function store(Request $request)

@@ -4,6 +4,12 @@
             {{ __('Messages') }}
         </h2>
     </x-slot>
+  <select name="contact" class="p-4 bg-gray-50 border rounded mt-3 ml-4 w-96">
+    @foreach($contacts as $contact)
+        <option value="{{ $contact->id }}">{{ $contact->first_name . ' ' . $contact->surname }}</option>
+    @endforeach                 
+</select>
+
 
    <div class="p-4 bg-gray-50 border rounded">
         <h3 class="text-lg font-semibold mb-4">Messages</h3>
