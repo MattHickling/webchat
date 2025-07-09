@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Contact;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Contact as ContactRequest;
+
 class ContactController extends Controller
 {
     public function addContact(Request $request)
@@ -16,8 +21,14 @@ class ContactController extends Controller
     public function create(ContactRequest $request)
     {
         // dd($request->surname);
+        $user = User::create([
+            'name' => $request->first_name . ' ' . $request->surname,
+            'email' => $request->email,
+            'password' => Hash::make(Str::random(12)), 
+        ]);
 
-        Contact::create([
+         Contact::create([
+            'id' => $user->id, 
             'first_name' => $request->first_name,
             'surname' => $request->surname,
             'email' => $request->email,
@@ -39,6 +50,7 @@ class ContactController extends Controller
             'source' => $request->source,
             'source_details' => $request->source_details,
         ]);
+
         return redirect()->back()->with('success', 'Contact added successfully!');
     }
 }

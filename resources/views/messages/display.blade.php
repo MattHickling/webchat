@@ -65,24 +65,4 @@ $(document).on('change', '#contact-select', function() {
     });
 });
 
-$(document).on('submit', '#send-message-form', function(e) {
-    e.preventDefault();
-
-    var form = $(this);
-    var formData = form.serialize();
-
-    $.ajax({
-        url: form.attr('action'),
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            $('#messages-container').html($(response).find('#messages-container').html());
-            form.find('textarea[name="body"]').val('');
-        },
-        error: function(xhr) {
-            console.error(xhr.responseText);
-            alert('Failed to send message.');
-        }
-    });
-});
 </script>

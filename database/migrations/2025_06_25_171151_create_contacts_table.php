@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -12,7 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
+            
+            $table->unsignedBigInteger('id')->primary();
+
             $table->string('first_name');
             $table->string('surname')->nullable();
             $table->string('email')->unique();
@@ -36,6 +39,8 @@ return new class extends Migration
             $table->string('profile_picture')->nullable(); 
             $table->string('social_media_links')->nullable();
             $table->timestamps();
+
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
