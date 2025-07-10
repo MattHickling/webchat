@@ -6,7 +6,7 @@
     </x-slot>
 
     <select id="contact-select" name="contact_id"
-        class="p-4 bg-gray-50 border rounded mt-3 ml-4 w-96">
+        class="p-4 bg-gray-50 border rounded mt-3 ml-4">
         <option value="">-- Select a Contact --</option>
         @foreach($contacts as $contact)
             <option value="{{ $contact->id }}"
