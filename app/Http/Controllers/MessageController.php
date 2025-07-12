@@ -10,22 +10,32 @@ class MessageController extends Controller
 {
     public function show(Request $request)
     {
+        $userId = auth()->id();
 
-        $contacts = Contact::all();
-        $contactId = $request->get('contact_id');
-        // dd($contacts);
-        $messages = Message::where('contact_id', $contactId)
-            ->orderBy('created_at')
+        $contacts = Contact::where('id', '!=', $userId)
+            ->where('is_blocked', false)
             ->get();
-// dd($messages);
+
+        $contactId = $request->get('contact_id');
+
         if ($contactId) {
-            $messages = Message::where('contact_id', $contactId)
+            $messages = Message::where(function ($query) use ($userId, $contactId) {
+                    $query->where('user_id', $userId)
+                        ->where('contact_id', $contactId);
+                })
+                ->orWhere(function ($query) use ($userId, $contactId) {
+                    $query->where('user_id', $contactId)
+                        ->where('contact_id', $userId);
+                })
                 ->orderBy('created_at')
                 ->get();
+        } else {
+            $messages = collect(); // no messages if no contact selected
         }
 
-        return view('messages.display', compact('contacts', 'messages', 'contactId'));
+        return view('messages.display', compact('contacts', 'messages', 'contactId', 'userId'));
     }
+
 
     public function store(Request $request)
     {

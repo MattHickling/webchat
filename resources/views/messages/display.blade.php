@@ -6,7 +6,7 @@
     </x-slot>
 
     <select id="contact-select" name="contact_id"
-        class="p-4 bg-gray-50 border rounded mt-3 ml-4 w-96">
+        class="p-4 bg-gray-50 border rounded mt-3 ml-4">
         <option value="">-- Select a Contact --</option>
         @foreach($contacts as $contact)
             <option value="{{ $contact->id }}"
@@ -18,18 +18,31 @@
 
     <div id="messages-container" class="p-4 bg-gray-50 border rounded mt-4">
         <h3 class="text-lg font-semibold mb-4">Messages</h3>
-        @if($messages->count())
-            <div class="space-y-4 max-h-96 overflow-y-auto">
-                @foreach ($messages as $message)
-                    <div class="p-3 rounded bg-white shadow">
-                        <p class="text-gray-700">{{ $message->body ?? $message->content }}</p>
-                        <p class="text-xs text-gray-500">{{ $message->created_at->format('d-m-y H:i') }}</p>
+       @if($messages->count())
+    <div class="space-y-4 max-h-96 overflow-y-auto">
+        @foreach ($messages as $message)
+                    <div class="flex">
+                        @if($message->contact_id == $userId)
+
+                            <div class="p-3 rounded bg-blue-100 shadow ml-auto max-w-xs">
+                                <p class="text-gray-700">{{ $message->body ?? $message->content }}</p>
+                                <p class="text-xs text-gray-500">{{ $message->created_at->format('d-m-y H:i') }}</p>
+                            </div>
+                        @else
+                                                                        {{-- {{  dd($message)}} --}}
+
+                            <div class="p-3 rounded bg-gray-100 shadow max-w-xs">
+                                <p class="text-gray-700">{{ $message->body ?? $message->content }}</p>
+                                <p class="text-xs text-gray-500">{{ $message->created_at->format('d-m-y H:i') }}</p>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
         @else
             <p class="text-gray-500">No messages yet. Start the conversation below:</p>
         @endif
+
 
         <form id="send-message-form" action="{{ route('messages.store') }}" method="POST" class="mt-4">
             @csrf
