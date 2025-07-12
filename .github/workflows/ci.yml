@@ -24,6 +24,6 @@ jobs:
       - run: echo "This job's status is ${{ job.status }}."
 
       - name: Run PHPStan
-        run: ./vendor/bin/phpstan analyse --memory-limit=512M
-
-        run: echo "PHPStan completed successfully"
+        run: |
+          ./vendor/bin/phpstan analyse --memory-limit=512M
+          echo "PHPStan completed successfully"
