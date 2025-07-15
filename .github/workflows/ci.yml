@@ -5,10 +5,15 @@ jobs:
   WebChat-Actions:
     runs-on: macos-latest
     steps:
-      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      
-      - name: Check out repository code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Install PHP dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -21,9 +26,7 @@ jobs:
       - name: Build Vite assets
         run: npm run build
 
-      - run: echo "This job's status is ${{ job.status }}."
-
       - name: Run PHPStan
-        run: ./vendor/bin/phpstan analyse --memory-limit=512M
-
-        run: echo "PHPStan completed successfully"
+        run: |
+          ./vendor/bin/phpstan analyse --memory-limit=512M
+          echo "PHPStan completed successfully"

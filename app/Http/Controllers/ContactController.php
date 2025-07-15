@@ -15,6 +15,7 @@ class ContactController extends Controller
     public function addContact(Request $request)
     {
         // dd($request->all());
+        
         return view('contacts.display');
     }
 
